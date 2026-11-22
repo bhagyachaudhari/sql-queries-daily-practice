@@ -23,18 +23,25 @@ PostalCode varchar(50),
 Country varchar(50)
 )
 
-
 insert into Customers1 values(1,   'Alfreds Futterkiste',	'Maria Anders',	'Obere Str. 57',	'Berlin', '12209',	'Germany')
-insert into Customers1 values(2,'Ana Trujillo Emparedados y helados','Ana Trujillo','Avda. de la ConstituciÃ³n 2222','MÃ©xico D.F.','05021','Mexico')
-insert into Customers1 values(3,'Antonio Moreno TaquerÃ­a','Antonio Moreno','Mataderos 2312','MÃ©xico D.F.','05023','Mexico')
+insert into Customers1 values(2,'Ana Trujillo Emparedados y helados','Ana Trujillo','Avda. de la Constitución 2222','México D.F.','05021','Mexico')
+insert into Customers1 values(3,'Antonio Moreno Taquería','Antonio Moreno','Mataderos 2312','México D.F.','05023','Mexico')
 
 select * from Orders1
 select * from Customers1
 
-select * from Orders1 o INNER JOIN Customers1 c on o.CustomerID = c.CustomerID		-- INNER JOIN
-select * from Orders1 o LEFT JOIN Customers1 c on o.CustomerID = c.CustomerID		-- LEFT OUTER JOIN
-select * from Orders1 o RIGHT JOIN Customers1 c on o.CustomerID = c.CustomerID		-- RIGHT OUTER JOIN
-select * from Orders1 o FULL JOIN Customers1 c on o.CustomerID = c.CustomerID		-- FULL OUTER JOIN
+-- INNER JOIN
+select * from Orders1 o INNER JOIN Customers1 c on o.CustomerID = c.CustomerID	
+
+-- LEFT OUTER JOIN
+select * from Orders1 o LEFT JOIN Customers1 c on o.CustomerID = c.CustomerID
+
+-- RIGHT OUTER JOIN
+select * from Orders1 o RIGHT JOIN Customers1 c on o.CustomerID = c.CustomerID
+
+-- FULL OUTER JOIN
+select * from Orders1 o FULL JOIN Customers1 c on o.CustomerID = c.CustomerID		
+
 
 -- CROSS JOIN
 
@@ -44,7 +51,6 @@ CROSS JOIN Customers1 c;
 
 
 -- SELECT * FROM Orders1 NATURAL JOIN Customers1;
-
 
 
 -- SELF JOIN
@@ -61,28 +67,3 @@ INNER JOIN Orders1 o USING (CustomerID);*/
 
 drop table Orders1
 drop table Customers1
-
-
-
-
-use scalerdb;
-
-select * from batches;
-
-
-
-select s.first_name, b.batch_name from students s LEFT JOIN batches b
-ON s.batch_id = b.batch_id;
-
-select s.first_name, b.batch_id from students s RIGHT JOIN batches b
-ON s.batch_id = b.batch_id;
-
-
-select s.first_name, b.batch_name from students s CROSS JOIN batches b
-where s.first_name = 'Ayushee';
-
-select * from students;
-
-select s1.first_name, s1.last_name, s2.first_name, s2.last_name from students s1, students s2
-where s1.first_name = 'Ayushee' AND s1.last_name = 'Shaw'
-

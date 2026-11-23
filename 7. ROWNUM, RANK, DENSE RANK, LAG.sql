@@ -146,6 +146,69 @@ FROM Employee;
 
 
 
+CREATE TABLE Orders (
+  OrderId INT,
+  CustomerId INT,
+  OrderDate DATE
+)
+
+CREATE TABLE Customers (
+  CustomerId INT,
+  CustomerName VARCHAR(50)
+)
+
+select * from Orders;
+select * from Customers;
+
+insert into customers values('1', 'Sonali');
+insert into customers values('2', 'Kumar');
+insert into customers values('3', 'Priyanka');
+insert into customers values('4', 'Suraj');
+insert into customers values('5', 'Monya');
+insert into customers values('6', 'Dhiraj');
+insert into customers values('7', 'Harshita');
+insert into customers values('8', 'Moni');
+
+
+insert into Orders values('1', '1', GETDATE());
+insert into Orders values('2', '2', GETDATE());
+insert into Orders values('3', '3', GETDATE());
+insert into Orders values('4', '4', GETDATE());
+insert into Orders values('5', '5', GETDATE());
+insert into Orders values('6', '6', GETDATE());
+insert into Orders values('7', '7', GETDATE());
+insert into Orders values('8', '8', GETDATE());
+
+insert into Orders values('9', '1', GETDATE());
+insert into Orders values('10', '2', GETDATE());
+
+
+select OrderDate, OrderId, 
+	LAG(OrderId) OVER (order by OrderDate) as prevOrderId
+	from Orders;
+
+select OrderDate, OrderId, 
+	SUM(OrderId) 
+    OVER (order by OrderDate ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) 
+    as totalOforderids
+	from Orders;
+
+	
+SELECT COUNT(*) as orders, o.OrderDate, o.CustomerId
+from orders o 
+--INNER JOIN customers c
+--ON o.CustomerId = c.CustomerId
+group by o.OrderDate, o.CustomerId
+HAVING COUNT(*) > 1;
+
+
+SELECT COUNT(*) as orders, o.OrderDate, o.CustomerId, c.CustomerName
+from orders o 
+INNER JOIN customers c
+ON o.CustomerId = c.CustomerId
+group by o.OrderDate, o.CustomerId, c.CustomerName
+HAVING COUNT(*) > 1;
+
 
 
 

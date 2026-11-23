@@ -86,6 +86,24 @@ select srno as ID, name as NAME from test
 
 
 
+use practice;
+
+
+-- Insert data
+INSERT INTO #TempTable VALUES (1, 'Alice'), (2, 'Bob');
+
+-- Select data
+SELECT * FROM #TempTable;
+
+DROP TABLE #TempTable;
+
+
+SET SHOWPLAN_XML ON;
+GO
+SELECT * FROM employee;
+GO
+SET SHOWPLAN_XML OFF;
+
 
 
 

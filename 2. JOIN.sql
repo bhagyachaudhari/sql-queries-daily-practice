@@ -67,3 +67,38 @@ INNER JOIN Orders1 o USING (CustomerID);*/
 
 drop table Orders1
 drop table Customers1
+
+
+create table ContractEmployee(EmpId int, Name varchar(50), DeptId int);
+create table Department(DeptId int, DeptName varchar(50));
+
+insert into ContractEmployee values(1, 'Bhagyashri', 1);
+insert into Department values(1, 'JVTC');
+
+insert into ContractEmployee values(2, 'Hindavi', null);
+insert into Department values(2, 'Collector');
+
+select * from ContractEmployee;
+select * from Department;
+
+
+select ce.empid, ce.name, ce.DeptId from ContractEmployee ce
+LEFT JOIN Department d
+ON ce.DeptId = d.DeptId
+where ce.DeptId IS NULL;
+
+
+
+select * from Department;
+select * from ContractEmployee;
+
+
+select * from Department d CROSS JOIN 
+ContractEmployee ce;
+
+select * from Department d FULL OUTER JOIN 
+ContractEmployee ce ON d.deptid = ce.deptid;
+
+select * from department where exists (select deptid from ContractEmployee);
+select * from department where deptid IN (select deptid from ContractEmployee);
+

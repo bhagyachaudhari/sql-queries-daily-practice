@@ -82,3 +82,63 @@ alter table users add constraint pk_id PRIMARY KEY(id);
 alter table users add constraint chk_age CHECK(age>10);
 alter table users add constraint uc_email UNIQUE(email);
 ALTER TABLE users alter column delind varchar(1) 
+
+
+
+CREATE TABLE employees (
+    employee_id INT NOT NULL AUTO_INCREMENT,         -- NOT NULL & AUTO_INCREMENT
+    first_name VARCHAR(50),
+    last_name VARCHAR(50) NOT NULL,                  -- NOT NULL
+    email VARCHAR(100) UNIQUE,                       -- UNIQUE
+    hire_date DATE NOT NULL,                         -- NOT NULL
+    salary DECIMAL(10, 2) CHECK (salary > 0),        -- CHECK constraint
+    department_id INT,
+	e_status VARCHAR(20) DEFAULT 'active',  -- DEFAULT constraint
+    PRIMARY KEY (employee_id),                       -- PRIMARY KEY
+    FOREIGN KEY (department_id) REFERENCES departments(department_id)  -- FOREIGN KEY
+    ON DELETE CASCADE           -- deletes employee if department is deleted
+	ON UPDATE CASCADE           -- updates employee if department changes
+);
+
+ALTER TABLE users
+ADD CONSTRAINT unique_username UNIQUE (username);
+
+ALTER TABLE users
+ADD CONSTRAINT chk_status CHECK (status IN ('active', 'inactive'));
+
+ALTER TABLE orders
+ADD CONSTRAINT fk_customer
+FOREIGN KEY (customer_id)
+REFERENCES customers(customer_id)
+ON DELETE SET NULL;
+
+
+select * from Employee;
+EXEC sp_help Employee;
+
+alter table Employee alter column EmpId int NOT NULL;
+
+alter table Employee add constraint pk_employee PRIMARY KEY(EmpId);
+
+alter table Employee add constraint chk_employee CHECK (Salary > 0);
+
+alter table Employee add empStatus char(50) default 'ACTIVE'
+
+-- update employee set empStatus = 'ACTIVE'
+
+alter table Employee add constraint uk_employee UNIQUE (Name);
+
+
+select * from Employee e1 JOIN Employee e2 ON e1.empid = e2.empid;
+
+select * from employee where name like 'k%';
+
+
+select * into FullTimeEmloyee from ContractEmployee
+select * from FullTimeEmloyee;
+
+insert into FullTimeEmloyee
+select * from ContractEmployee
+
+
+

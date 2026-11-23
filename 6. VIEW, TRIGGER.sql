@@ -33,6 +33,29 @@ drop trigger trg_test
 
 
 
+-- VIEW
+
+create view vw_Orders as select * from orders;
+select * from vw_Orders;
+
+create index idx_orders ON orders(orderid);
+
+exec sp_help orders;
+
+
+-- trigger
+
+create trigger trg_orders
+on orders
+after insert 
+as
+begin
+	insert into orders values(11, 1, getdate());
+end
+
+
+insert into orders values(12, 2, getdate());
+select * from orders;
 
 
 
